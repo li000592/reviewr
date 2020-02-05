@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> 
+        <link href="https://fonts.googleapis.com/css?family=Sigmar+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Reviewer</title>
+    </head>
+    <body>
+        <section class="page active " id="home">
+            <header>
+              <h1>ReviewR</h1>
+              <img  id="btnAdd" data-target="add" src="./img/camera-button.svg" alt="">
+              <!-- <button >+ Add</button> -->
+            </header>
+            <main>
+              <div id="msg" cardNum="">You haven't upload any image, please click <img id="msg-btn" data-target="add" src="./img/camera-solid.svg" alt=""> to start your reviews.</div>
+              <ul class="review-list">
+              </ul>
+            </main>
+          </section>
+          <section class="page " id="details">
+            <header>
+              <button id="btnDetailsBack" data-target="home">&lt; Back</button>
+              <h1>Details</h1>
+            </header>
+
+            <main>
+              <figure>
+                <img  id="imgDetails" src="./img/IMG_2933.jpeg" alt="imgDetails">
+                <figcaption id="nameDetails">Item Name</figcaption>
+              </figure>
+              <p>Created Date: <span id="dateDetails"></span></p>
+              <p><span id="RatingNumDetails">5</span>/5</p>
+              <p><button data-target="home" id="btnDelete">Delete</button></p>
+            </main>
+          </section>
+          <section class="page" id="add">
+            <header>
+              <button id="btnAddBack" data-target="home">&lt; Back</button>
+              <h1>Add new Review</h1>
+              <button id="btnSave-header" data-target="home"><img data-target="home" src="./img/save-btn.svg" alt=""></button>
+            </header>
+            <main>
+              <div id="btnTakePhoto" class="photo-form">
+                <img id="addImg" src="./img/add-nothing.svg" alt="addImg-default">
+              </div>
+              <div id="add-info" >
+
+                <!-- <div class="photo-button">
+                  <button id="btnTakePhoto">
+                    ICON
+                  </button>
+                </div> -->
+                
+                
+                  <!-- <label for="name">
+                    <p>Item Name</p>
+                    <input type="text" id="name" placeholder="Item Name"
+                  /></label> -->
+                  <div class="form" for="name">
+                    <input id="input" type="text" name="name" autocomplete="off" required/> 
+                    <label for="name" class="label-name">             
+                        <span class="content-name">Item Name</span>
+                    </label>   
+            </div>
+                </p>
+                <p>
+                  <!-- <label for="rating"> -->
+                    <!-- <input type="number" id="rating" value="3"/></label> -->
+                    <div class="stars" data-rating="4">
+                      <p>Rating</p>
+                      <span class="star">&nbsp;</span>
+                      <span class="star">&nbsp;</span>
+                      <span class="star">&nbsp;</span>
+                      <span class="star">&nbsp;</span>
+                      <span class="star">&nbsp;</span>
+                  </div>
+                    </p>
+                    
+                <div id="info-btn">
+                  <p><button data-target="home" id="btnSave">Save</button></p>
+                  <p><button data-target="home" id="btnCancel">Cancel</button></p>
+                </div>
+
+              </div>
+            </main>
+          </section>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        
+    </body>
+</html>
+
+<!-- <div id="home" class="page active">
+    <div class="header"> 
+        <div class="text">
+            <div class="Back"><img class="empty-btn" src="./img/empty-button.svg" alt="empty-btn">   </div>
+            <span  class="title">Re<img class="takePhoto" src="./img/camera-solid-white.svg" alt="">view</span>   
+            <img data-href="add" id="go-home" class="goAdd-btn" src="./img/camera-button.svg" alt="goAdd-btn">
+        </div>              
+    </div>
+    <div class="cardsList">
+        <div class="msg"></div>
+        <div class="card">
+            <img class="img-home" src="./img/IMG_4743.jpeg" alt="apple">
+            <div class="home-info">
+                <div class="name">Brand New Aplle!</div>
+                <div class="date">Photo on Dec 23 2019</div>
+                <div class="rating">******</div>
+            </div>       
+        </div>
+        <div class="card">
+            <img class="img-home" src="./img/IMG_4743.jpeg" alt="apple">
+            <div class="home-info">
+                <div class="name">Brand New Aplle!</div>
+                <div class="rating">******</div>
+            </div>       
+        </div>
+        
+        <p>––– END –––</p>
+    </div>
+
+<div id="details" class="page ">
+    <div class="header"> 
+        <div class="text">
+            <div class="Back"><img class="empty-btn" src="./img/empty-button.svg" alt="empty-btn">   </div>
+            <span  class="title">Detail</span>   
+            <img data-href="add" id="go-home" class="goAdd-btn" src="./img/camera-button.svg" alt="goAdd-btn">
+        </div>              
+    </div>
+    
+    <div class="info">
+        <div class="photo">
+            <img src="./img/IMG_4743.jpeg" alt="">
+        </div>
+    </div>
+    
+    <div class="name">X-MAS</div>
+    <div class="rating"></div>
+
+</div>
+
+<div id="add" class="page">
+    <div class="header"> 
+        <div class="text">
+            <div class="Back"><img class="empty-btn" src="./img/empty-button.svg" alt="empty-btn">   </div>
+            <span  class="title">Add</span>   
+            <img data-href="add" id="go-home" class="goAdd-btn" src="./img/camera-button.svg" alt="goAdd-btn">
+        </div>              
+    </div>
+    <div class="name"></div>
+    <div class="starts">
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+    </div>
+    <div class="done"></div>
+</div> -->
