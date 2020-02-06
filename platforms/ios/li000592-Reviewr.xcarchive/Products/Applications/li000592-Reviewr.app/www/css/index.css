@@ -270,7 +270,9 @@ figure{
 }
 #nameDetails{
   font-size: 25px;
-  align-items: center;
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 #btnDelete {
   margin-top: 45px;

@@ -262,11 +262,11 @@ const app = {
     document.getElementById("msg-btn").addEventListener("click", app.nav);
     //from add to home
     document.getElementById("btnAddBack").addEventListener("click", app.nav);
-    document.getElementById("btnSave-header").addEventListener("click", app.saveReviews);
+    document.getElementById("btnSave-header").addEventListener("click", app.saveBtn);
     document.getElementById("btnTakePhoto").addEventListener("click", app.takePhoto);
-    document.getElementById("btnSave").addEventListener("click", app.saveReviews);
+    document.getElementById("btnSave").addEventListener("click", app.saveBtn);
     //delete
-    document.getElementById("btnDelete").addEventListener("click", app.deleteReview);
+    document.getElementById("btnDelete").addEventListener("click", app.deleteConfirm);
     document.querySelectorAll(".star").forEach(function(star){
       star.addEventListener("click", app.setRating);
     })
@@ -277,10 +277,13 @@ const app = {
         if(element.id == app.whichIsClick.id){
           app.deleteOjb = index;
           console.log(app.deleteOjb);
-          app.data.slice(index, 1);
+          app.data.splice(index, 1);
+          console.log(app.data);
           localStorage.setItem(app.KEY, JSON.stringify(app.data));
           app.createHomePageList(ev);
-          app.nav(ev);
+          document.querySelector(".page.active").classList.remove("active");
+          document.getElementById("home").classList.add("active");
+
         }
       })
 
@@ -311,7 +314,35 @@ const app = {
       console.log("fail!");
       document.querySelector(".msg").textContent = imgURI;
   },
+  deleteConfirm:()=>{
+    let button = ["Yes", "No"];
+    navigator.notification.confirm("Are you sure to delete this review?",
+    (responseIndex)=>{
+      if(responseIndex == 1){
+        app.deleteReview();
+      }
+    }, "Warm", button)
+  },
+  saveConfirm:(ev)=>{
+    let button = ["Yes", "No"];
+    navigator.notification.confirm("You didn't fill up Item Name or take photo. Are you sure Save this review?",
+    (responseIndex)=>{
+      if(responseIndex == 1){
+        app.saveReviews(ev);
+
+      }
+    }, "Warm", button)
+  },
+  saveBtn(ev){
+    let Addinput = document.querySelector("#input").value;
+    let AddImg = document.getElementById("addImg");
+    console.log(Addinput, AddImg);
+    if(Addinput.length ==0 || AddImg.alt == "addImg-default"){
+      app.saveConfirm(ev);
+    }else{app.saveReviews(ev)}
+  },
   saveReviews:(ev)=>{
+
     console.log("running saveReviews");
     console.log(document.querySelector("#input").value.length );
     // let Addinput = document.querySelector("#input").value;
@@ -321,14 +352,16 @@ const app = {
     // if(Addinput.length == 0){()=>{console.log("plz, fill up ITEM NAME~")}}
     // else if(AddImg.alt == "addImg-default"){()=>{console.log("plz, take a photo first~")}}
     // else{
-      app.nav(ev);
+      document.querySelector(".page.active").classList.remove("active");
+      document.getElementById("home").classList.add("active");
+      // app.nav(ev);
+
       console.log("function: saveReviews Nav")
       app.copyImage(ev);
       console.log("function: saveReviews CopyImage")
       setTimeout(() => {
         app.createHomePageList();
         console.log("function: saveReviews createHomePageList")
-
       }, 500);
 
     // }
