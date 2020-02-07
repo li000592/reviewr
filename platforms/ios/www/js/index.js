@@ -10,6 +10,7 @@ const app = {
   KEY: null,
   whichIsClick: null,
   deleteOjb:null,
+  oldFile:null,
     // imgPath:null,
   init: () => {
     setTimeout(() => {
@@ -69,6 +70,42 @@ const app = {
       );
     }
   },
+  deleteImg: (ev) =>{
+    
+    // ev.preventDefault();
+    // ev.stopPropagation();
+    let clickFilePath = app.whichIsClick.imgPath.nativeURL;
+    resolveLocalFileSystemURL(clickFilePath, function(dir) {
+      dir.getFile(`${app.whichIsClick.id}.png`, {create:false}, function(fileEntry) {
+        fileEntry.remove(function(){
+            // The file has been removed succesfully
+        },function(error){
+          console.log("sucessfully deleted this card");
+          console.log("sucessfully deleted this card");
+            // Error deleting the file
+        },function(err){
+            // The file doesn't exist
+            console.wrarn("Delete failure", err);
+        });
+      });
+    });
+    // resolveLocalFileSystemURL(
+    //   clickFilePath,
+    //   entry =>{
+    //     clickFilePath.remove(
+    //       ()=>{
+    //         console.log("sucessfully deleted this card");
+    //       },
+    //       err =>{
+    //         console.wrarn("Delete failure", err);
+    //       }
+    //     );
+    //   }
+    // ),err=>{
+    //     console.error(err);
+    // }
+
+  },
   copyImage: ev => {
     ev.preventDefault();
     ev.stopPropagation();
@@ -110,6 +147,7 @@ const app = {
             document.getElementById("addImg").src = "./img/add-nothing.svg";
             document.querySelector(".stars").setAttribute("data-rating", "4");
             document.querySelector("#input").value = "";
+            // app.tempURL = "./img/add-nothing.svg";
 
             app.permFile = permFile;
             console.log(permFile);
@@ -196,7 +234,7 @@ const app = {
     //   setTimeout(() => {
     //     app.createList(); 
     //   }, 500);
-    // if(target == "details"){
+    if(target == "details"){
       targetTitle =btn.getAttribute("card-id");
       console.log("changing details info")
       console.log(targetTitle)
@@ -213,7 +251,7 @@ const app = {
       }});
 
     
-  // }
+  }
 },
   getLocalStorage: () => {
     let str = localStorage.getItem(app.KEY);//getItem => get string;
@@ -265,6 +303,7 @@ const app = {
     document.getElementById("btnSave-header").addEventListener("click", app.saveBtn);
     document.getElementById("btnTakePhoto").addEventListener("click", app.takePhoto);
     document.getElementById("btnSave").addEventListener("click", app.saveBtn);
+    document.getElementById("btnCancel").addEventListener("click", app.nav);
     //delete
     document.getElementById("btnDelete").addEventListener("click", app.deleteConfirm);
     document.querySelectorAll(".star").forEach(function(star){
@@ -283,6 +322,7 @@ const app = {
           app.createHomePageList(ev);
           document.querySelector(".page.active").classList.remove("active");
           document.getElementById("home").classList.add("active");
+          app.deleteImg(ev);
 
         }
       })
@@ -345,13 +385,6 @@ const app = {
 
     console.log("running saveReviews");
     console.log(document.querySelector("#input").value.length );
-    // let Addinput = document.querySelector("#input").value;
-    // let AddImg = document.getElementById("addImg");
-    // console.log(Addinput.length);
-    // console.log(AddImg);
-    // if(Addinput.length == 0){()=>{console.log("plz, fill up ITEM NAME~")}}
-    // else if(AddImg.alt == "addImg-default"){()=>{console.log("plz, take a photo first~")}}
-    // else{
       document.querySelector(".page.active").classList.remove("active");
       document.getElementById("home").classList.add("active");
       // app.nav(ev);
